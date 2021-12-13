@@ -17,22 +17,34 @@ public class PlayerMovement : MonoBehaviour {
 
 	float horizontalMove = 0f;
     
-    int tempo = 30;
+    int tempo;
     int tempo_escudo;
 
-	bool jump = false;
-	bool crouch = false;
+	bool jump;
+	bool crouch;
 	
-    public static bool escudo = false;
+    public static bool escudo;
 
-	public static bool preso = false;
+	public static bool preso;
 
 	public static Vector3 LocalPreso;
 	
     public Transform Morto;
 
-	private bool first = true;
-	
+	private bool first;
+
+	void Start()
+	{
+
+		first = true;
+		jump = false;
+		crouch = false;
+		escudo = false;
+		preso = false;
+
+		tempo = 30;
+
+	}
 	
 	// Update is called once per frame
 	void Update () {

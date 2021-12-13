@@ -11,17 +11,22 @@ public class Intro : MonoBehaviour
 
     if(Input.GetButtonDown("Easy") == true)
     {
-      ItensPicker.difficulty = 0;
+      ItensPicker.difficulty = 1;
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
     if(Input.GetButtonDown("Medium") == true)
     {
-      ItensPicker.difficulty = 1;
+      ItensPicker.difficulty = 2;
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
     if(Input.GetButtonDown("Hard") == true)
     {
-      ItensPicker.difficulty = 2;
+      ItensPicker.difficulty = 3;
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+    if(Input.GetButtonDown("Impossible") == true)
+    {
+      ItensPicker.difficulty = 4;
       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 

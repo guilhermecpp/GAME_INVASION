@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 //Bibliotecas
 public class ItensPicker : MonoBehaviour { // Nome da Classe
 
@@ -11,31 +13,44 @@ public class ItensPicker : MonoBehaviour { // Nome da Classe
     public static int Itens; //Conta o numero de moedas
     public Text scoreText; //Pontuação
     public Text liveText; // Vida
+    public Text timeText; // Vida
     public static int live; // barra de vida
     public static int difficulty;
-
+    public static int timeLeft;
+    private int aux;
     
     private void Start()
     {
+
         //inicializa variaveis 
         Itens = 15;
         scoreText.text = "";
         liveText.text = "";
+        timeText.text = "";
+
         
-        if(difficulty == 0)
+        if(difficulty == 1)
         {
           live = 10;
         }
         
-        if(difficulty == 1)
+        if(difficulty == 2)
         {
           live = 5;
         }
         
-        if(difficulty == 2)
+        if(difficulty == 3)
         {
           live = 1;
         }
+
+        if(difficulty == 4)
+        {
+          timeLeft = 60;
+          live = 1;
+          aux = 50;
+        }
+
 
         KillSoundReplay = KillSound;
 
@@ -44,8 +59,36 @@ public class ItensPicker : MonoBehaviour { // Nome da Classe
     private void Update()
     {
 
-      scoreText.text = "Inimigos: "+Itens.ToString();
-      liveText.text = "Life: "+live.ToString();
+      scoreText.text = "Enemies: "+Itens.ToString();
+      liveText.text = "Lifes: "+live.ToString();
+
+      if(difficulty == 4 && Pause.pause == false && SceneManager.GetActiveScene().name == "Fase02")
+      {
+    
+        timeText.text = timeLeft.ToString();        
+
+        if(aux == 0)
+        {
+
+          timeLeft--;
+
+          aux = 50;
+
+        }else
+        {
+
+          aux--;
+
+        }
+
+        if(timeLeft == 0)
+        {
+
+          live = 0;
+
+        }
+
+      }
 
     }
 
@@ -167,6 +210,11 @@ public class ItensPicker : MonoBehaviour { // Nome da Classe
               KillSound.volume = ((float)(15 - Itens) / 15f);
               KillSound.Play();
             }
+        }
+        
+        if(collision.CompareTag("Fase") == true)//Essa condição verifica se o player encostou com um objeto com rotulo Fire
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
 
     }
